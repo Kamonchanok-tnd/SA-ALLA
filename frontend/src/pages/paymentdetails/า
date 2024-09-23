@@ -21,3 +21,40 @@
     </div>
   </div>
 </div>
+
+<div className={styles.content}>
+    <img
+      src={moviePoster || Poster} 
+      alt="Movie Poster"
+      className={styles.poster}
+    />
+    <div className={styles.details}>
+      <h1 className={styles.title}>{movieName}</h1>
+      <div className={styles.infoGroup}>
+        <div className={styles.infoItem}>
+          <img src={IconDate} alt="date" className={styles.icon} />{" "}
+          <span>{showDate}</span>
+        </div>
+        <div className={styles.infoItem}>
+          <img src={Icontime} alt="time" className={styles.icon} />{" "}
+          <span>{showTime}</span>
+        </div>
+        <div className={styles.infoItem}>
+          <img src={Iconlo} alt="location" className={styles.icon} />{" "}
+          <span>The Mall Korat</span>
+        </div>
+        <div className={styles.infoItem}>
+          <h2>Theater {theaterID}</h2>
+        </div>
+        <div className={styles.languagesInfo}>
+          <div className={styles.info}>
+            <img src={Iconsound} alt="sound" className={styles.icon} /> TH
+          </div>
+          <div className={styles.info}>
+            <img src={Iconsub} alt="subtitle" className={styles.icon} /> ENG
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
