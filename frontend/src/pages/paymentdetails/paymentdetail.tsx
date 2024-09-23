@@ -100,16 +100,17 @@ const PaymentDetail: React.FC = () => {
       });
     }
   }, [showtimeID]);
-
+  
   const handleCouponChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
     const [id, discount] = e.target.value.split("|");
     if (id && discount) {
-      setSelectedCoupon({ id, discount });
+      setSelectedCoupon({ id, discount }); // อัปเดตคูปองที่เลือก
       console.log("Coupon selected:", { id, discount });
     } else {
       console.error("Failed to parse selected coupon");
     }
-  };
+};
+
 
   const handleApplyCoupon = () => {
     console.log("Apply Click!!!!");
@@ -131,10 +132,14 @@ const PaymentDetail: React.FC = () => {
         "Discounted Total Price:",
         Math.max(0, totalPrice - discount)
       ); // แสดงค่าหลังใช้คูปอง
+
+      // อัปเดตคูปองที่เลือกไว้ใน select box
+      setSelectedCoupon({ id: selectedCoupon.id, discount: selectedCoupon.discount });
     } else {
       console.warn("No valid coupon selected");
     }
-  };
+};
+
 
   const handleCancel = () => {
     setSelectedCoupon(null); // Reset the selected coupon value to null
