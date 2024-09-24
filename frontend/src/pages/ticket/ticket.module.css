@@ -136,7 +136,7 @@
   .buttonContainer {
     display: flex;
     justify-content: center;
-    gap: 200px;
+    gap: 100px;
     margin-top: -50px;
     margin-bottom: 50px;
   }

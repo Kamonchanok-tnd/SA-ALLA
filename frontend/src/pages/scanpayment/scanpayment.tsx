@@ -51,6 +51,7 @@ const ScanPayment: React.FC = () => {
   const [showButtons, setShowButtons] = useState(false);
   const [showCancelConfirmation, setShowCancelConfirmation] = useState(false);
   const [isCheckingSlip, setIsCheckingSlip] = useState<boolean>(false);
+  const [checkSlipUsed, setCheckSlipUsed] = useState<boolean>(true);
   const [checkResult, setCheckResult] = useState<boolean | null>(null);
   const [timeUpPopup, setTimeUpPopup] = useState(false);
 
@@ -174,6 +175,7 @@ const ScanPayment: React.FC = () => {
         );
         setShowSuccessPopup(true);
         showAlert("success", "Payment Successful!");
+        setCheckSlipUsed(false); // Stop using CheckSlip
       } catch (error) {
         console.error("Error during saving payment:", error);
         showAlert(
@@ -209,7 +211,6 @@ const ScanPayment: React.FC = () => {
     }
     setAlert({ type, message });
   };
-  
 
   return (
     <>
@@ -356,7 +357,10 @@ const ScanPayment: React.FC = () => {
           {/* Confirm and Reset Buttons */}
           {showButtons && (
             <div className={styles.paymentButtonWrapper}>
-              <button className={`${styles.button} ${styles.cancelButton}`} onClick={handleReset}>
+              <button
+                className={`${styles.button} ${styles.cancelButton}`}
+                onClick={handleReset}
+              >
                 Reset
               </button>
               <button className={styles.button} onClick={handleSubmit}>
@@ -367,7 +371,7 @@ const ScanPayment: React.FC = () => {
         </div>
 
         {/* Render CheckSlip component only if isCheckingSlip is true */}
-        {isCheckingSlip && (
+        {isCheckingSlip && checkSlipUsed && (
           <CheckSlip
             file={files}
             totalPrice={totalPrice}
