@@ -45,7 +45,7 @@ const ScanPayment: React.FC = () => {
   const [moviePoster, setMoviePoster] = useState<string | null>(null);
   const [totalPrice, setTotalPrice] = useState<number | null>(null);
 
-  const [timeLeft, setTimeLeft] = useState(6000); // Time countdown in seconds
+  const [timeLeft, setTimeLeft] = useState(600); // Time countdown in seconds
   const [files, setFiles] = useState<File | null>(null);
   const [showSuccessPopup, setShowSuccessPopup] = useState(false);
   const [showButtons, setShowButtons] = useState(false);
@@ -203,8 +203,13 @@ const ScanPayment: React.FC = () => {
   };
 
   const showAlert = (type: "success" | "error", message: string) => {
+    if (showSuccessPopup || timeUpPopup) {
+      // ถ้ามี popup ใดๆ กำลังแสดงอยู่ จะไม่แสดง alert
+      return;
+    }
     setAlert({ type, message });
   };
+  
 
   return (
     <>
