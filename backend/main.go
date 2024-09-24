@@ -75,17 +75,17 @@ func main() {
 		router.POST("/tickets", controller.CreateTicket)
 		router.PATCH("/ticket/:id", controller.UpdateTicket)
 		router.DELETE("/tickets/:id", controller.DeleteTicket)
-		router.PATCH("/tickets/status/:id", controller.UpdateTicketStatus)
+		router.PATCH("/tickets/status/:id", controller.UpdateTicketStatusAndPoints)
 
 		// Payment Routes
 		router.GET("/payments", controller.ListPayments)
-	router.GET("/payment/:id", controller.GetPayment)
-	router.POST("/payments", controller.CreatePayment)
-	router.PATCH("/payments/:id", controller.UpdatePayment)
-	router.DELETE("/payments/:id", controller.DeletePayment)
-	router.GET("/payments/ticket/:ticketid", controller.GetPaymentByTicketID)
-	router.PATCH("/payments/status/:ticketID", controller.UpdatePaymentStatusByTicketID)
-	router.PATCH("/payments/upload-slip", controller.UpdatePaymentSlipByTicketID)
+		router.GET("/payment/:id", controller.GetPayment)
+		router.POST("/payments", controller.CreatePayment)
+		router.PATCH("/payments/:id", controller.UpdatePayment)
+		router.DELETE("/payments/:id", controller.DeletePayment)
+		router.GET("/payments/ticket/:ticketid", controller.GetPaymentByTicketID)
+		router.PATCH("/payments/status/:ticketID", controller.UpdatePaymentStatusByTicketID)
+		router.PATCH("/payments/upload-slip", controller.UpdatePaymentSlipByTicketID)
 
 		// Reward Routes
         router.GET("/rewards", controller.ListRewards)          // เส้นทางสำหรับดึงข้อมูลรางวัลทั้งหมด

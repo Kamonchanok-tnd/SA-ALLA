@@ -52,7 +52,7 @@ const ScanPayment: React.FC = () => {
   const [showCancelConfirmation, setShowCancelConfirmation] = useState(false);
   const [isCheckingSlip, setIsCheckingSlip] = useState<boolean>(false);
   const [checkSlipUsed, setCheckSlipUsed] = useState<boolean>(true);
-  const [checkResult, setCheckResult] = useState<boolean | null>(null);
+  //const [checkResult, setCheckResult] = useState<boolean | null>(null);
   const [timeUpPopup, setTimeUpPopup] = useState(false);
 
   // State สำหรับควบคุมการแสดงผล Alert
@@ -326,14 +326,13 @@ const ScanPayment: React.FC = () => {
               <div className={styles.confirmationBox}>
                 <p>คุณต้องการยกเลิกการชำระเงินและออกจากหน้านี้หรือไม่?</p>
                 <div className={styles.confirmationButtons}>
-                  <button
-                    className={styles.button}
+                  <button className={styles.button} style={{ backgroundColor: '#fff',color: '#000' }}
                     onClick={handleConfirmCancel}
                   >
                     ใช่
                   </button>
                   <button
-                    className={`${styles.button} ${styles.cancelButton}`}
+                    className={`${styles.button} ${styles.cancelButton}`} style={{ backgroundColor: '#077bce',color: '#fff' }}
                     onClick={handleCloseCancelConfirmation}
                   >
                     ยกเลิก

@@ -186,7 +186,7 @@ const PaymentDetail: React.FC = () => {
         if (ticketID) {
           try {
             await updatePaymentStatus(ticketID, "Paid");
-            await updateTicketStatus(ticketID, "Booked");
+            await updateTicketStatus(ticketID, "Booked",0);
           } catch (error) {
             console.error("Error updating status:", error);
           }
