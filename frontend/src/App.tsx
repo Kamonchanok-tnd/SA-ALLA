@@ -23,7 +23,6 @@ import CheckCodeReward from './pages/Checkcodereward/checkcode';
 import MovieTable from './pages/Movie/MovieTable/movietable';
 import MovieEdit from './pages/Movie/MovieEdit/movieedit';
 
-
 const App: React.FC = () => {
     const navigate = useNavigate();
     const location = useLocation();
@@ -57,13 +56,43 @@ const App: React.FC = () => {
             }
         }
     }, [isLoggedIn, isAdmin, isStaff, navigate, location.pathname]);
-    
+
+    useEffect(() => {
+        // ป้องกันการกดปุ่ม Back และ Forward
+        history.pushState(null, null, window.location.href);
+        window.onpopstate = function () {
+            history.go(1);
+        };
+
+        // ป้องกันการกด F5 หรือปุ่ม Refresh อื่น ๆ
+        const handleKeyDown = (event: KeyboardEvent) => {
+            if (event.key === 'F5' || (event.ctrlKey && event.key === 'r')) {
+                event.preventDefault();
+            }
+        };
+
+        // ป้องกันการ reload หรือปิดหน้า
+        const handleBeforeUnload = (event: BeforeUnloadEvent) => {
+            const message = "Are you sure you want to leave this page? Changes you made may not be saved.";
+            event.returnValue = message;
+            return message;
+        };
+
+        window.addEventListener('keydown', handleKeyDown);
+        window.addEventListener('beforeunload', handleBeforeUnload);
+
+        // Cleanup listeners on component unmount
+        return () => {
+            window.removeEventListener('keydown', handleKeyDown);
+            window.removeEventListener('beforeunload', handleBeforeUnload);
+        };
+    }, []);
+
     return (
         <div className="app">
             {isLoggedIn && isAdmin && <Sidebar />}
             <div className="main-content">
                 <Routes>
-                    
                     <Route path="/login" element={<Login />} />
                     
                     {/* เส้นทางสำหรับผู้ใช้ Admin */}
@@ -89,8 +118,8 @@ const App: React.FC = () => {
                     <Route path="/reward" element={isLoggedIn && !isAdmin ? <Reward /> : <Navigate to="/login" />} />
                     <Route path="/history" element={isLoggedIn && !isAdmin ? <HistoryPage /> : <Navigate to="/login" />} />
                   
-                  {/*เส้นทางสำหรับสตาฟ*/ }
-                  <Route path="/scanner" element={isLoggedIn && isStaff ? <QrScanner /> : <Navigate to="/login"/>} />
+                    {/*เส้นทางสำหรับสตาฟ*/ }
+                    <Route path="/scanner" element={isLoggedIn && isStaff ? <QrScanner /> : <Navigate to="/login"/>} />
                     <Route path="/ticketstatus" element={isLoggedIn && isStaff ? <Table /> : <Navigate to="/login"/>} />
                     <Route path="/checkcode" element={isLoggedIn && isStaff ? <CheckCodeReward /> : <Navigate to="/login"/>} />
 

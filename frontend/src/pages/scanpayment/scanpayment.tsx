@@ -140,6 +140,7 @@ const ScanPayment: React.FC = () => {
       if (ticketID) {
         await updatePaymentStatus(ticketID, "unfinish");
         await updateTicketStatus(ticketID, "unfinish");
+        showAlert("error", "ชำระเงินไม่สำเร็จ");
         navigate("/home");
       }
     } catch (error) {
